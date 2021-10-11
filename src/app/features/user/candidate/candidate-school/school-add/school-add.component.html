@@ -1,0 +1,47 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#educationInfo">
+    Eğitim Bilgisi Ekle
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="educationInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup] = "addSchoolForm">
+
+            <div class="form-floating mb-3">
+              <select class="form-select" aria-label="schools" formControlName="schoolId" id="schools">
+                <option [ngValue]="item.id" *ngFor="let item of schools">{{item.name}}</option>
+              </select>
+              <label for="schools">Okul Adı</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <select class="form-select" aria-label="departments" formControlName="departmentId" id="departments">
+                <option [ngValue]="item.id" *ngFor="let item of departments">{{item.name}}</option>
+              </select>
+              <label for="departments">Bölüm</label>
+            </div>
+
+            <div class="mb-3 row">
+              <div class="input-group mb-3">
+                <input type="number" class="form-control" placeholder="Başlangıç Tarihi" aria-label="Giriş" formControlName = "startYear">
+                <input type="number" class="form-control" placeholder="Mezuniyet Tarihi" aria-label="Çıkış" formControlName = "graduationYear">
+              </div>
+              <small class="form-text text-danger" *ngIf="!validDates">
+                Okula başlama tarihi okulun bitiş tarihinden büyük olamaz...
+              </small>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click) = "addSchool()">Eğitim Bilgisi Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,81 @@
+<div *ngIf = "employer === undefined; else updateForm"></div>
+
+
+
+<ng-template #updateForm>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#employerUpdate">
+    Bilgileri Güncelle
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="employerUpdate" tabindex="-1" aria-labelledby="employerUpdate" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row my-3">
+            <div class="col-9">
+              <form autocomplete="off"  [formGroup] = "companyNameUpdateForm">
+                <div class="row">
+                  <label for="companyName" class="col-sm-3 col-form-label">Şirket Adı:</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="companyName" placeholder="{{employer.companyName}}" formControlName = "companyName">
+                  </div>
+                </div>
+            </form>
+            </div>
+            <div class="col-3">
+              <button class = "btn btn-primary" (click) = "updateCompanyName(employer.id)"  data-bs-dismiss="modal">Güncelle</button>
+            </div>
+          </div>
+
+          <div class="row my-3">
+            <div class="col-9">
+              <form autocomplete="off"  [formGroup] = "emailWebsiteUpdateForm">
+                <div class="row">
+                  <label for="email" class="col-sm-3 col-form-label">E-Posta:</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="email" placeholder="{{employer.email}}" formControlName = "email">
+                  </div>
+                </div>
+                <div class="my-3 row">
+                  <label for="website" class="col-sm-3 col-form-label">Web sitesi:</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="website" placeholder="{{employer.website}}" formControlName = "website">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-3">
+              <button class = "btn btn-primary" (click) = "updateEmailWebsite(employer.id)" data-bs-dismiss="modal">Güncelle</button>
+            </div>
+          </div>
+
+          <div class="row my-3">
+            <div class="col-9">
+              <form autocomplete="off" [formGroup] = "phoneNumberUpdateForm">
+                <div class="row">
+                  <label for="phoneNumber" class="col-sm-3 col-form-label">Telefon:</label>
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" id="phoneNumber" placeholder="{{employer.phoneNumber}}"  formControlName = "phoneNumber">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-3">
+              <button class = "btn btn-primary" (click) = "updatePhoneNumber(employer.id)" data-bs-dismiss="modal">Güncelle</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

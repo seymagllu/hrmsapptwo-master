@@ -1,0 +1,34 @@
+<main class="form-signin">
+    <form [formGroup] = "signInForm" autocomplete="off">
+      <h1 class="h3 mb-3 fw-normal">Üye Ol</h1>
+  
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput1" placeholder="" formControlName = "companyName">
+        <label for="floatingInput">Şirket Adı</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput2" placeholder="" formControlName = "website">
+        <label for="floatingInput">Web Sitesi</label>
+      </div>
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput3" placeholder="" formControlName = "email">
+        <label for="floatingInput">Email</label>
+        <small class="form-text text-danger" *ngIf="signInForm.get('email').touched && validEmail">Web Sitesi ile E-Posta adresi aynı domaine sahip olmalıdır...</small>
+      </div>
+      <div class="form-floating">
+        <input type="number" class="form-control" id="floatingInput4" placeholder="" formControlName = "phoneNumber">
+        <label for="floatingInput">Telefon</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword1" placeholder="" formControlName = "password">
+        <label for="floatingPassword">Şifre</label>
+        <small class="form-text text-danger" *ngIf="signInForm.get('password').invalid && signInForm.get('password').touched">Şifre En az 6 karakter uzunluğunda olmalıdır...</small>
+      </div>
+      <div class="form-floating mb-5">
+        <input type="password" class="form-control" id="floatingPassword2" placeholder="" formControlName = "confirmPassword">
+        <label for="floatingPassword">Şifre Tekrarı</label>
+        <small class="form-text text-danger" *ngIf="signInForm.get('confirmPassword').touched && !validPassword">Şifre tekrarı yanlış...</small>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit" (click) = "signIn()">Yeni Üyelik Oluştur</button>
+    </form>
+  </main>

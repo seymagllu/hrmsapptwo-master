@@ -1,0 +1,131 @@
+<div *ngIf = "cvs === undefined;else content">
+</div>
+
+<ng-template #content>
+
+    <div class="container pb-5">
+        <div class="row" >
+            
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item my-4" *ngFor = "let cv of cvs; let i = index">
+                  <h2 class="accordion-header" [id]="'heading' + i">
+                    <button class="accordion-button" [ngClass]="{ 'collapsed': i != 0 }" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+i" aria-expanded="true" [attr.aria-controls]="'collapse'+i"> 
+                        Cv - {{cv.title}}
+                    </button>
+                  </h2>
+                  <div [id]="'collapse'+i" class="accordion-collapse collapse"  [attr.aria-labelledby]="'heading'+i" data-bs-parent="#accordionExample">                    <div class="accordion-body">
+                        <article class="resume-wrapper text-center position-relative">
+                            <div class="resume-wrapper-inner mx-auto text-start bg-white shadow-lg">
+                                <header class="resume-header pt-4 pt-md-0">
+                                    <div class="row">
+                                        <div class="col-block col-md-auto resume-picture-holder text-center text-md-start">
+                                            <img class="picture" src="" alt="">
+                                        </div><!--//col-->
+                                        <div class="col">
+                                            <div class="row p-4 justify-content-center justify-content-md-between">
+                                                <div class="primary-info col-auto">
+                                                    <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase">{{candidate.firstName}} {{candidate.lastName}}</h1>
+                                                    <div class="title mb-3">{{cv.title}}</div>
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-2"><a class="text-link" href="#"><i class="far fa-envelope fa-fw me-2" data-fa-transform="grow-3"></i>{{candidate.email}}</a></li>
+                                                        <li><a class="text-link" href="#"><i class="fas fa-mobile-alt fa-fw me-2" data-fa-transform="grow-6"></i>{{candidate.githubAccount}}</a></li>
+                                                        <li><a class="text-link" href="#"><i class="fas fa-mobile-alt fa-fw me-2" data-fa-transform="grow-6"></i>{{candidate.linkedinAccount}}</a></li>
+                                                    </ul>
+                                                </div><!--//primary-info-->
+                                            </div><!--//row-->
+                                            
+                                        </div><!--//col-->
+                                    </div><!--//row-->
+                                </header>
+                                <div class="resume-body p-5">
+                                    <section class="resume-section summary-section mb-5">
+                                        <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Ön Yazı</h2>
+                                        <div class="resume-section-content">
+                                            <p class="mb-0">
+                                                {{cv.coverLetter}}
+                                            </p>
+                                        </div>
+                                    </section><!--//summary-section-->
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <section class="resume-section experience-section mb-5">
+                                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">İş Tecrübeleri</h2>
+                                                <div class="resume-section-content">
+                                                    <div class="resume-timeline position-relative">
+                                                        <article class="resume-timeline-item position-relative pb-5" *ngFor = "let exp of cv.candidateJobExperiences">
+                                                            <div class="resume-timeline-item-header mb-2">
+                                                                <div class="d-flex flex-column flex-md-row">
+                                                                    <h3 class="resume-position-title font-weight-bold mb-1">{{exp.position.title}}</h3>
+                                                                    <div class="resume-company-name ms-auto">{{exp.workPlace}}</div>
+                                                                </div><!--//row-->
+                                                                <div class="resume-position-time">{{exp.startYear}} - {{exp.quitYear}}</div>
+                                                            </div><!--//resume-timeline-item-header-->
+                                                    </article><!--//resume-timeline-item-->
+                                                    </div><!--//resume-timeline-->
+                                                </div>
+                                            </section><!--//experience-section-->
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <section class="resume-section skills-section mb-5">
+                                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Skills &amp; Tools</h2>
+                                                <div class="resume-section-content">
+                                                    <div class="resume-skill-item">
+                                                        <ul class="list-unstyled mb-4">
+                                                            <li class="mb-2" *ngFor = "let skill of cv.candidateSkills">
+                                                                <div class="resume-skill-name">{{skill.skill.name}}</div>
+                                                                <div class="progress resume-progress">
+                                                                    <div class="progress-bar theme-progress-bar-dark" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div><!--//resume-skill-item-->
+                                                </div><!--resume-section-content-->
+                                            </section><!--//skills-section-->
+                                            <section class="resume-section education-section mb-5">
+                                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Eğitim Bilgileri</h2>
+                                                <div class="resume-section-content">
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-2" *ngFor = "let school of cv.candidateSchools">
+                                                            <div class="resume-degree font-weight-bold">{{school.department.name}}</div>
+                                                            <div class="resume-degree-org">{{school.school.name}}</div>
+                                                            <div class="resume-degree-time">{{school.startYear}} - {{school.graduationYear}}</div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </section><!--//education-section-->
+                                            <section class="resume-section language-section mb-5">
+                                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Dil Yetkinlikleri</h2>
+                                                <div class="resume-section-content">
+                                                    <ul class="list-unstyled resume-lang-list">
+                                                        <li class="mb-2" *ngFor = "let language of cv.candidateLanguages">
+                                                            <span class="resume-lang-name font-weight-bold me-3">{{language.language.name}}</span> <small class="text-muted font-weight-normal">{{language.languageLevel}}</small>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </section><!--//language-section-->
+                                        </div>
+                                    </div><!--//row-->
+                                </div><!--//resume-body-->
+                            </div>
+                        </article> 
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row my-2">
+                        <div class="col-auto text-center">
+                            <button class = "myButton" (click) = "deleteCv(cv.id)">Özgeçmişi Sil</button>
+                        </div>
+                        
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</ng-template>
+
+
+
+

@@ -1,0 +1,36 @@
+<app-base-navbar></app-base-navbar>
+<div class="container-fluid">
+  <div class="row" *ngIf="checkUser(); else notLoggedIn">
+    <div class="col-2">
+      <div [ngSwitch]="checkUserType()">
+        <div *ngSwitchCase="1">
+          <app-employer-sidebar></app-employer-sidebar>
+        </div>
+        <div *ngSwitchCase="2">
+          <app-candidate-sidebar></app-candidate-sidebar>
+        </div>
+        <div *ngSwitchCase="3">
+          <app-system-employee-sidebar></app-system-employee-sidebar>
+        </div>
+      </div>
+    </div>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="container mx-3 mt-3 shadow-lg">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+
+  <ng-template #notLoggedIn>
+    <div class="row mx-4">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="container mt-3 shadow-lg">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      <div class="col-1"></div>
+
+    </div>
+  </ng-template>
+</div>

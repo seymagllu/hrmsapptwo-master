@@ -1,0 +1,77 @@
+<div *ngIf = "favouriteAds.length === 0; else content">
+    <div class="container pb-5">
+        <div class="row">
+            <h2 class = "mt-3 border-2 border-bottom">Favori İlanlarım</h2>
+        </div>
+        <div class="row">
+            <div class = "mt-5">
+                <div class="alert alert-primary" role="alert">
+                    Favorilerinize ilan eklemediniz...
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4"><div class = "alert alert-danger text-center"><a class = "text-decoration-none fw-bold" routerLink = "/">Ana Sayfaya Dön</a></div></div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content>
+    <div class="container pb-5">
+        <div class="row">
+            <h2 class = "mt-3 border-2 border-bottom">Favori İlanlarım</h2>
+        </div>
+        <div class="row mt-5">
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="pi pi-search"></i></span>
+                        <input type="text" class="form-control" placeholder = "Şehir" [(ngModel)] = "filterText" />
+                      </div>
+                </div>
+
+            </div>
+            
+            <div class="card">
+                <p-table [value]="favouriteAds | filter : filterText" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,15]">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Şirket Adı</th>
+                            <th>Pozisyon</th>
+                            <th>Şehir</th>
+                            <th>Açık Pozisyonlar</th>
+                            <th>Maaş Aralığı</th>
+                            <th>İlan Tarihi</th>
+                            <th>Son Başvuru Tarihi</th>
+                            <th>Favorilerden Kaldır</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-ad>
+                        <tr>
+                            <td>{{ad.employer.companyName}}</td>
+                            <td>{{ad.position.title}}</td>
+                            <td>{{ad.city.name}}</td>
+                            <td>{{ad.openPositions}}</td>
+                            <td>{{ad.minSalary}} - {{ad.maxSalary}}</td>
+                            <td>{{ad.createdAt | date : 'shortDate'}}</td>
+                            <td>{{ad.deadline | date: 'shortDate'}}</td>
+                            <td><button class = "btn btn-danger" (click) = "removeFromFavourites(ad.id)">Kaldır</button></td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="paginatorleft">
+                        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+                    </ng-template>
+                    <ng-template pTemplate="paginatorright">
+                        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+

@@ -1,0 +1,101 @@
+<div *ngIf="candidate === undefined; else content">
+
+</div>
+
+
+<ng-template #content>
+  <div class="container">
+    <div class="row">
+      <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
+        <li class="nav-item mx-2" role="presentation">
+          <button class="nav-link active" id="experiences-tab" data-bs-toggle="tab" data-bs-target="#experiences" type="button" role="tab" aria-controls="experiences" aria-selected="true">İş Tecrübeleri</button>
+        </li>
+        <li class="nav-item mx-2" role="presentation">
+          <button class="nav-link" id="schools-tab" data-bs-toggle="tab" data-bs-target="#schools" type="button" role="tab" aria-controls="schools" aria-selected="false">Eğitim Bilgileri</button>
+        </li>
+        <li class="nav-item mx-2" role="presentation">
+          <button class="nav-link" id="languages-tab" data-bs-toggle="tab" data-bs-target="#languages" type="button" role="tab" aria-controls="languages" aria-selected="false">Dil Yetkinlikleri</button>
+        </li>
+        <li class="nav-item mx-2" role="presentation">
+          <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills" type="button" role="tab" aria-controls="skills" aria-selected="false">Beceriler</button>
+        </li>
+        <li class="nav-item mx-2" role="presentation">
+          <button class="nav-link" id="links-tab" data-bs-toggle="tab" data-bs-target="#links" type="button" role="tab" aria-controls="links" aria-selected="false">Bağlantılar</button>
+        </li>
+        <li class="nav-item mx-2" role="presentation">
+          <button class="nav-link" id="photos-tab" data-bs-toggle="tab" data-bs-target="#photos" type="button" role="tab" aria-controls="photos" aria-selected="false">Fotoğraflar</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <!-- *************************************** Job Experiences ***************************************-->
+        <div class="tab-pane fade show active" id="experiences" role="tabpanel" aria-labelledby="experience-tab">
+          <app-job-experience-list [candidate]="candidate" (deleteJobExperienceEvent)="updateJobExperiencesAfterDelete($event)"></app-job-experience-list>
+          <div class="row my-3">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <app-job-experience-add [candidate]="candidate" (addJobExperienceEvent)="updateJobExperiencesAfterAdd($event)"></app-job-experience-add>
+            </div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+        <!-- **************************************************************************************************** -->
+        <!-- *************************************** School Information ***************************************-->
+        <div class="tab-pane fade" id="schools" role="tabpanel" aria-labelledby="schools-tab">
+          <app-school-list [candidate] = "candidate" (deleteSchoolEvent) = "updateSchoolsAfterDelete($event)"></app-school-list>
+          <div class="row my-3">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <app-school-add [candidate] = "candidate" (addSchoolEvent) = "updateSchoolsAfterAdd($event)"></app-school-add>
+            </div>
+            <div class="col-4"></div>
+          </div>
+          
+        </div>
+        <!-- **************************************************************************************************** -->
+        <div class="tab-pane fade" id="languages" role="tabpanel" aria-labelledby="languages-tab">
+          <app-language-list [candidate] = "candidate" (deleteLanguageEvent) = "updateLanguagesAfterDelete($event)"></app-language-list>
+          <div class="row my-3">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <app-language-add [candidate] = "candidate" (addLanguageEvent) = "updateLanguagesAfterAdd($event)"></app-language-add>
+            </div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
+          <app-skill-list [candidate] = "candidate" (deleteSkillEvent) = "updateSkillsAfterDelete($event)"> </app-skill-list>
+          <div class="row my-3">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <app-skill-add [candidate] = "candidate" (addSkillEvent) = "updateSkillsAfterAdd($event)"></app-skill-add>
+            </div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
+          <app-links-list [candidate] = "candidate"></app-links-list>
+          <div class="row my-3">
+            <div class="col-3"></div>
+            <div class="col-3"><app-add-github [candidate] = "candidate" (addGithubEvent) = "updateGithubAccount($event)"></app-add-github></div>
+            <div class="col-3"><app-add-linkedin [candidate] = "candidate" (addLinkedinEvent) = "updateLinkedinAccount($event)"></app-add-linkedin></div>
+            <div class="col-3"></div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
+          <app-image-list [candidate] = "candidate" (deleteImageEvent) = "updateImagesAfterDelete($event)"></app-image-list>
+          <div class="row my-3">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <app-image-add [candidate] = "candidate" (addImageEvent) = "updateImagesAfterAdd($event)"></app-image-add>
+            </div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
+</ng-template>

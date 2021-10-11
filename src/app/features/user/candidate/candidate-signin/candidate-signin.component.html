@@ -1,0 +1,39 @@
+<main class="form-signin">
+    <form autocomplete="off"   [formGroup] = "signInForm">
+      <h1 class="h3 mb-3 fw-normal">Yeni Üyelik Oluştur</h1>
+  
+      <div class="form-floating mt-1">
+        <input type="text" class="form-control" id="floatingInput1" placeholder="Adınız..." formControlName = "firstName">
+        <label for="floatingInput">Ad</label>
+      </div>
+      <div class="form-floating mt-1">
+        <input type="text" class="form-control" id="floatingInput2" placeholder="Soyadınız..." formControlName = "lastName">
+        <label for="floatingInput">Soyad</label>
+      </div>
+      <div class="form-floating mt-1">
+        <input type="number" class="form-control" id="floatingInput3" placeholder="Doğum Yılınız..." formControlName = "birthYear">
+        <label for="floatingPassword">Doğum Yılı</label>
+      </div>
+      <div class="form-floating mt-1">
+        <input type="text" class="form-control" id="floatingInput4" placeholder="TC Kimlik No..." formControlName = "nationalityId">
+        <label for="floatingInput">T.C. Kimlik No</label>
+        <small class="form-text text-danger" *ngIf="signInForm.get('nationalityId').invalid && signInForm.get('nationalityId').touched">Geçerli ve 11 haneli bir TC Kimlik No giriniz...</small>
+      </div>
+      <div class="form-floating mt-1">
+        <input type="email" class="form-control" id="floatingInput5" placeholder="E-Posta Adresiniz..." formControlName = "email">
+        <label for="floatingInput">E-Posta Adresi</label>
+        <small class="form-text text-danger" *ngIf="signInForm.get('email').invalid && signInForm.get('email').touched && validEmail">Geçerli bir e-posta adresi giriniz...</small>
+
+      </div>
+      <div class="form-floating mt-1">
+        <input type="password" class="form-control" id="floatingPassword1" placeholder="" formControlName = "password">
+        <label for="floatingPassword">Şifre</label>
+        <small class="form-text text-danger" *ngIf="signInForm.get('password').invalid && signInForm.get('password').touched">Şifre En az 6 karakter uzunluğunda olmalıdır...</small>
+      </div>
+      <div class="form-floating mt-1">
+        <input type="password" class="form-control" id="floatingPassword2" placeholder="" formControlName = "confirmPassword">
+        <label for="floatingPassword">Şifre Tekrarı</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit" (click) = "signIn()">Yeni Üye Oluştur</button>
+    </form>
+  </main>

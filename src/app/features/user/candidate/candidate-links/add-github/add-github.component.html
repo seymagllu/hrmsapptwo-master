@@ -1,0 +1,25 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#githubLink">
+    Github Hesabı Ekle/Değiştir
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="githubLink" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup] = "addGithubLinkForm">
+            <div class = "m-3">
+                <label for="githubLink" class="form-label">Github Link</label>
+                <input type="text" class="form-control" id="githubLink" placeholder="" formControlName = "githubLink">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click) = "addGithubLink()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

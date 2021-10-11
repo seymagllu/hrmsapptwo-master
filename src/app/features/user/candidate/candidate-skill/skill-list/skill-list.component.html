@@ -1,0 +1,32 @@
+<div *ngIf = "candidateSkills.length === 0; else skillList">
+    <div class="container pb-5">
+        <div class="row">
+            <div class = "mt-5">
+                <div class="alert alert-primary" role="alert">
+                    Yetenek Eklemediniz
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #skillList>
+    <div class="container">
+        <div class="row mt-3">
+            <p-table [value]="candidateSkills">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Beceri</th>
+                        <th>Sil</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-candSkill>
+                    <tr>
+                        <td>{{candSkill.skill.name}}</td>
+                        <td><button class = "btn btn-light" [style.background-color]="color" (click) = "deleteSkill(candSkill.id)" ><i class="pi pi-times-circle"></i></button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,60 @@
+<div *ngIf = "candidate === undefined && candidateFavourites.length === 0 && jobAdvertisements.length === 0; else content"></div>
+
+<ng-template #content>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <h3 class = " my-5 text-center border-2 border-bottom">İlanlar</h3>
+                <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="pi pi-search"></i></span>
+                            <input type="text" class="form-control" placeholder = "Şehir" [(ngModel)] = "filterText" />
+                          </div>
+                    </div>
+
+                </div>
+                <p-table [value]="jobAdvertisements | filter : filterText" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,15]">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Şirket Adı</th>
+                            <th>Pozisyon</th>
+                            <th>Şehir</th>
+                            <th>Açık Pozisyonlar</th>
+                            <th>Maaş Aralığı</th>
+                            <th>İlan Tarihi</th>
+                            <th>Son Başvuru Tarihi</th>
+                            <th *ngIf = "checkUserType() === 2">Favorilere Ekle</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-ad>
+                        <tr>
+                            <td>{{ad.employer.companyName}}</td>
+                            <td>{{ad.position.title}}</td>
+                            <td>{{ad.city.name}}</td>
+                            <td>{{ad.openPositions}}</td>
+                            <td>{{ad.minSalary}} - {{ad.maxSalary}}</td>
+                            <td>{{ad.createdAt | date : 'shortDate'}}</td>
+                            <td>{{ad.deadline | date : 'shortDate'}}</td>
+                            <td *ngIf = "checkUserType() === 2">
+                                <div *ngIf = "checkFavourite(ad.id); else addFav">
+                                    <button class = "btn btn-danger" (click) = "removeFromFavourites(ad.id)"><i class="pi pi-minus-circle"></i></button>
+                                </div>
+                                <ng-template #addFav>
+                                    <button class = "btn btn-success" (click) = "addToFavourites(ad)"><i class="pi pi-plus-circle"></i></button>
+                                </ng-template>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="paginatorleft">
+                    </ng-template>
+                    <ng-template pTemplate="paginatorright">
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</ng-template>

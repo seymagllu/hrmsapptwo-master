@@ -1,0 +1,28 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#imageAdd">
+    Yeni Fotoğraf ekle
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="imageAdd" tabindex="-1" aria-labelledby="imageAdd" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row m-3">
+                  <form [formGroup] = "addImageForm">
+                    <div class="input-group">
+                      <input type="file" class="form-control" id="inputGroupFile04" 
+                      aria-describedby="inputGroupFileAddon04" aria-label="" formControlName = "multipartFile" (change) = "onFileChange($event)">
+                      <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" (click) = "uploadImage()" data-bs-dismiss="modal">Ekle</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>

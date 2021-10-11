@@ -1,0 +1,29 @@
+<div *ngIf = "candidateImages.length === 0; else imageList">
+    <div class="container pb-5">
+        <div class="row">
+            <div class = "mt-5">
+                <div class="alert alert-primary" role="alert">
+                    Fotoğraf Eklemediniz...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #imageList>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-auto" *ngFor = "let img of candidateImages">
+                <div class="card" style="width: 200px;">
+                    <img alt="Card" src= "{{img.imageUrl}}" width = "100%" height = "200">
+                </div>
+                <div class = "row justify-content-center">
+                    
+                    <div class = "col"><button class = "btn btn-danger w-100" (click) = "deleteImage(img.id)">Sil</button></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>

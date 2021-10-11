@@ -1,0 +1,70 @@
+<div *ngIf = "employer === undefined; else employerCard"></div>
+
+
+<ng-template #employerCard>
+<div class="container pb-5">
+    <div class="row">
+        <div class="card mt-5">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-3">
+                    <span class = "fw-bold">Şirket Adı:</span>
+                  </div>
+                  <div class="col-9">
+                    {{employer.companyName}}
+                  </div>
+                </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-3">
+                      <span class = "fw-bold">Web Sitesi:</span>
+                    </div>
+                    <div class="col-9">
+                      {{employer.website}}
+                    </div>
+                  </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-3">
+                        <span class = "fw-bold">E-Posta:</span>
+                      </div>
+                      <div class="col-9">
+                        {{employer.email}}
+                      </div>
+                    </div>
+                    </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-3">
+                        <span class = "fw-bold">Telefon:</span>
+                      </div>
+                      <div class="col-9">
+                        {{employer.phoneNumber}}
+                      </div>
+                    </div>
+                    </li>
+            </ul>
+          </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-3 px-5 py-2">
+        <app-employer-update [employer] = "employer" (updateEmployerEvent) = "updateVerification($event)"></app-employer-update>
+      </div>
+      <div class="col-9">
+        <div class="alert alert-warning" *ngIf = "employer.updateVerified === false; else updatedInformation" role="alert">
+          Güncellemeler Onay Bekliyor
+        </div>
+      </div>
+      
+      <ng-template #updatedInformation>
+        <div class="alert alert-success" role="alert">
+          Bilgiler Güncel
+        </div>
+      </ng-template>      
+
+    </div>
+</div>
+</ng-template>

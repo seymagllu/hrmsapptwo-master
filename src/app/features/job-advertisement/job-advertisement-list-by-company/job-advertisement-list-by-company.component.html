@@ -1,0 +1,54 @@
+<div class="container pb-5">
+  <div class="row mt-5">
+      <div class="card mt-5" *ngIf = "jobAdvertisements.length !== 0; else emptyList">
+        <h2 class = "my-3 py-3 border-2 border-bottom">İlanlar</h2>
+          <p-table [value]="jobAdvertisements" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" responsiveLayout="scroll"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,15]">
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th>Şirket Adı</th>
+                      <th>Pozisyon</th>
+                      <th>Şehir</th>
+                      <th>Açık Pozisyonlar</th>
+                      <th>Maaş Aralığı</th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-ad>
+                  <tr>
+                      <td>{{ad.employer.companyName}}</td>
+                      <td>{{ad.position.title}}</td>
+                      <td>{{ad.city.name}}</td>
+                      <td>{{ad.openPositions}}</td>
+                      <td>{{ad.minSalary}} - {{ad.maxSalary}}</td>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="paginatorleft">
+              </ng-template>
+              <ng-template pTemplate="paginatorright">
+              </ng-template>
+          </p-table>
+          <div class="row mt-3">
+            <div class="col-4"></div>
+            <div class="col-4"><div class = "alert alert-danger text-center"><a class = "text-decoration-none fw-bold" routerLink = "/">Ana Sayfaya Dön</a></div></div>
+            <div class="col-4"></div>
+        </div>
+      </div>
+      
+      <ng-template #emptyList>
+        <div class="container pb-5">
+            <div class="row">
+                <div class = "mt-5">
+                    <div class="alert alert-primary" role="alert">
+                        Bu firmaya ait aktif iş ilanı bulunmamaktadır...
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4"><div class = "alert alert-danger text-center"><a class = "text-decoration-none fw-bold" routerLink = "/">Ana Sayfaya Dön</a></div></div>
+                <div class="col-4"></div>
+            </div>
+        </div>
+      </ng-template>
+  </div>
+</div>

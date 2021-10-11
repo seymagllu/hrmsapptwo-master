@@ -1,0 +1,36 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#languageAdd">
+    Dil Yeteneği Ekle
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="languageAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup] = "addLanguageForm">
+            <div class="form-floating mb-3">
+              <select class="form-select" aria-label="languages" id="languages" formControlName = "name">
+                <option [ngValue]="item.id" *ngFor="let item of languages">{{item.name}}</option>
+              </select>
+              <label for="languages">Yabancı Dil</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <select class="form-select" aria-label="languages" id="LanguageLevel" formControlName = "languageLevel">
+                <option [ngValue]="item.level" *ngFor="let item of languageLevelInformation">{{item.description}}</option>
+              </select>
+              <label for="languageLevel">Dil Seviyesi</label>
+            </div>
+
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click) = "addLanguage()">Dil Yetkinliği Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>

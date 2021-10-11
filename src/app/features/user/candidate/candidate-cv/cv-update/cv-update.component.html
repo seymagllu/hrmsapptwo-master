@@ -1,0 +1,177 @@
+<div *ngIf = "candidate === undefined && candidateCvs.length === 0; else content">
+  
+</div>
+
+<ng-template #content>
+    <div class="container-fluid pb-5">
+        <div class="row mt-3 mx-1">
+            <div class="card"  *ngFor = "let cv of candidateCvs">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                        <!--Update Title Form-->
+                        <div class="row my-3">
+                                <div class="row">
+                                  <form autocomplete="off" [formGroup] = "updateTitleForm">
+                                    <div class="input-group mb-3 w-100">
+                                      <label for="updateTitle" class="col-sm-2 col-form-label">Başlık: </label>
+                                      <input id = "updateTitle" type="text" class="form-control" placeholder="{{cv.title}}" formControlName = "title">
+                                      <button class="btn btn-success" type="button" id="button-addon2" (click) = "updateTitle(cv.id)">Güncelle</button>
+                                    </div>
+                                    </form>
+                                </div>
+                        </div>
+                        <!--*********************************************************************************************************-->
+                      <p class="card-text"><span class = "fw-bold"> Ad: </span>{{cv.candidate.firstName}}</p>
+                      <p class="card-text"><span class = "fw-bold"> Soyad: </span> {{cv.candidate.lastName}}</p>
+                      <p class="card-text"><span class = "fw-bold"> E-Posta Adresi: </span> {{cv.candidate.email}}</p>
+                      <p class="card-text"><span class = "fw-bold"> Github: </span> {{cv.candidate.githubAccount}}</p>
+                      <p class="card-text"><span class = "fw-bold"> Linkedin: </span> {{cv.candidate.linkedinAccount}}</p>
+        
+                      <div class="row my-3">
+                            <div class="row">
+                              <form autocomplete="off" [formGroup] = "updateCoverLetterForm">
+                                <div class="row"></div>
+                                  <label for="updateCoverLetter" class="col-sm-4 col-form-label">Ön Yazı: </label>
+                                  <div class="col-sm-8">
+                                      <textarea class="form-control" id="updateCoverLetter" rows="3" formControlName = "coverLetter"></textarea>
+                                  </div>
+                              </form>
+                              <div class="row mt-1">
+                                <div class="col"><button class = "btn btn-success mt-1" (click) = "updateCoverLetter(cv.id)">Güncelle</button></div>
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="row" *ngIf = "cv.image !== null">
+                        <img src="{{cv.image.imageUrl}}" alt="..." width = "100px" height = "250px">
+                      </div>
+                      <div class="row">
+                        <button class = "btn btn-primary my-2" (click) = "updateImage(cv.id)">Fotoğrafı Güncelle</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        
+                <!--Update Job Experiences-->
+                <ul class="list-group list-group-flush my-4">
+                  <li class="list-group-item">
+                      <div class="row">
+                          <div class="col-9">
+                            <p class = "fw-bold">İş Tecrübeleri</p>
+                          </div>
+                          <div class="col-3">
+                            <button class = "btn btn-primary" (click) = "updateJobExperiences()">Güncelle</button>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="list-group-item" *ngFor = "let candidateExperience of cv.candidateJobExperiences">
+                    <div class="row">
+                        <div class="col-9">
+                            <p> {{candidateExperience.workPlace}} - {{candidateExperience.position.title}} </p>
+                            <p>{{candidateExperience.startYear}} - {{candidateExperience.quitYear }}</p>
+                        </div>
+                        <div class="col-3">
+                            <button class = "btn btn-danger" (click) = "removeJobExperience(candidateExperience.id, cv.id)">Kaldır</button>
+                        </div>
+                    </div>
+                   </li>
+                </ul>
+                <!--****************************************************************************************************-->
+        
+                <!--Update School Information-->
+                <ul class="list-group list-group-flush my-4">
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-9">
+                        <p class = "fw-bold">Eğitim Bilgileri</p>
+                      </div>
+                      <div class="col-3">
+                        <button class = "btn btn-primary" (click) = "updateSchools(cv.id)">Güncelle</button>
+                      </div>
+                    </div>
+                    
+                  </li>
+                  <li class="list-group-item" *ngFor = "let candidateSchool of cv.candidateSchools">
+                    <div class="row">
+                      <div class="col-9">
+                        <p> {{candidateSchool.school.name}} - {{candidateSchool.department.name}} </p>
+                        <p> {{candidateSchool.startYear}} - {{candidateSchool.graduationYear}} </p>
+                      </div>
+                      <div class="col-3">
+                        <button class = "btn btn-danger" (click) = "removeSchool(candidateSchool.id, cv.id)">Kaldır</button>
+                      </div>
+                    </div>
+        
+                  </li>
+                </ul>
+                <!--****************************************************************************************************-->
+                
+                <!--Update Language Skills-->
+                <ul class="list-group list-group-flush my-4">
+                  <li class = "list-group-item">
+                    <div class="row">
+                      <div class="col-9">
+                        <p class="fw-bold"> Dil Yetkinlikleri </p>
+                      </div>
+                      <div class="col-3">
+                        <button class = "btn btn-primary" (click) = "updateLanguages(cv.id)">Güncelle</button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item" *ngFor = "let candidateLanguage of cv.candidateLanguages">
+                    <div class="row">
+                      <div class="col-9">
+                        <p> {{candidateLanguage.language.name}} - {{candidateLanguage.languageLevel}}</p>
+                      </div>
+                      <div class="col-3">
+                        <button class = "btn btn-danger" (click) = "removeLanguage(candidateLanguage.id, cv.id)">Kaldır</button>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <!--****************************************************************************************************-->
+                <!--Update Skills-->
+                <ul class="list-group list-group-flush my-4">
+                  <li class = "list-group-item">
+                    <div class="row">
+                      <div class="col-9">
+                        <p class="fw-bold">Beceriler </p>
+                      </div>
+                      <div class="col-3">
+                        <button class = "btn btn-primary" (click) = "updateSkills(cv.id)">Güncelle</button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item" *ngFor = "let candidateSkill of cv.candidateSkills">
+                    <div class="row">
+                      <div class="col-9">
+                        <p> {{candidateSkill.skill.name}}</p>
+                      </div>
+                      <div class="col-3">
+                        <button class = "btn btn-danger" (click) = "removeSkill(candidateSkill.id, cv.id)">Kaldır</button>
+                      </div>
+                    </div>
+                    
+                  </li>
+                </ul>
+                <!--****************************************************************************************************-->
+                <div class="row py-5">
+                  <div class="col-4"></div>
+                    <div class="col-4">
+                      <button class = "btn btn-success w-100" (click) = "pageReloadDelay()">Güncellemeleri Tamamla</button>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+              </div>
+        </div>
+    </div>
+    
+</ng-template>
+            
+
+
+
+
+

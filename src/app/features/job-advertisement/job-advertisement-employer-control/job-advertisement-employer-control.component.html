@@ -1,0 +1,74 @@
+<div class="container pb-5" *ngIf = "jobAdvertisements.length !== 0; else emptyList">
+    <div class="row mt-3">
+        <div class="card">
+            <h3 class = " my-5 text-center border-2 border-bottom">İlanları Yönet</h3>
+            <p-table [value]="jobAdvertisements" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,15]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Şirket Adı</th>
+                        <th>Pozisyon</th>
+                        <th>Şehir</th>
+                        <th>Açık Pozisyonlar</th>
+                        <th>Maaş Aralığı</th>
+                        <th>Aktif/Pasif</th>
+                        <th>Onay Durumu</th>
+                        <th>Yayın Durumu</th>
+                        <th>Aktivasyon</th>
+                        <th>Sil</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ad>
+                    <tr>
+                        <td>{{ad.employer.companyName}}</td>
+                        <td>{{ad.position.title}}</td>
+                        <td>{{ad.city.name}}</td>
+                        <td>{{ad.openPositions}}</td>
+                        <td>{{ad.minSalary}} - {{ad.maxSalary}}</td>
+                        <td>
+                            <div class = "alert my-1 row" [ngClass] = "{'alert-success' : ad.active === true, 'alert-danger': ad.active === false}">
+                                {{ad.active | activation}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class = "alert my-1 row" [ngClass] = "{'alert-success' : ad.verified === true, 'alert-warning': ad.verified === false}">
+                                {{ad.verified | verification}}
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class = "alert my-1 row" [ngClass] = "{'alert-success' : ad.verified === true && ad.verified === true, 'alert-danger' : ad.active === false || ad.verified === false }">
+                                {{ad.verified && ad.active | broadcast : ad.active : ad.verified }}
+                            </div>
+                        </td>
+
+                        <td>
+                            <button class = "btn p-2" [ngClass]="{ 'btn-success' : ad.active === false, 'btn-danger' : ad.active === true }" (click) = "changeStatus(ad.id, !ad.active)">
+                                {{!ad.active | activation}} Yap
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "btn btn-danger p-2" (click) = "deleteAd(ad.id)">İlanı Sil</button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+<ng-template #emptyList>
+    <div class="container pb-5">
+        <div class="row">
+            <div class="alert alert-primary mt-5" role="alert">
+                İş ilanınız bulunmamaktadır...
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<!-- Modal -->

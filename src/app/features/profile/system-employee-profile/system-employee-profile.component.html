@@ -1,0 +1,41 @@
+<div class="container pb-5 pt-3">
+    <div class="row mt-5">
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="fw-bold">Ad:</span>
+                        </div>
+                        <div class="col-9">
+                            {{systemEmployee.firstName}}
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="fw-bold">Soyad:</span>
+                        </div>
+                        <div class="col-9">
+                            {{systemEmployee.lastName}}
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="fw-bold">E-Posta:</span>
+                        </div>
+                        <div class="col-9">
+                            {{systemEmployee.email}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row my-3">
+        <app-system-employee-update [systemEmployee] = "systemEmployee" (updateSystemEmployeeEvent) = "updateInformation($event)"></app-system-employee-update>
+    </div>
+</div>

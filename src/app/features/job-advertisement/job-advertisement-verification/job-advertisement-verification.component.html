@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <h3 class = " my-5 text-center border-2 border-bottom">İlan Yönetimi</h3>
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="pi pi-search"></i></span>
+                        <input type="text" class="form-control" placeholder = "Firma Adı" [(ngModel)] = "filterText" />
+                      </div>
+                </div>
+            </div>
+            <p-table [value]="jobAdvertisements | filterAdsByCompany : filterText" [paginator]="true" [rows]="15" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[15, 20, 25]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Şirket Adı</th>
+                        <th>Pozisyon</th>
+                        <th>Şehir</th>
+                        <th>Açık Pozisyonlar</th>
+                        <th>Maaş Aralığı</th>
+                        <th>Aktif/Pasif</th>
+                        <th>Onay Durumu</th>
+                        <th>Yayın Durumu</th>
+                        <th>Onayla</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ad>
+                    <tr>
+                        <td>{{ad.employer.companyName}}</td>
+                        <td>{{ad.position.title}}</td>
+                        <td>{{ad.city.name}}</td>
+                        <td>{{ad.openPositions}}</td>
+                        <td>{{ad.minSalary}} - {{ad.maxSalary}}</td>
+                        <td>
+                            <div class = "alert my-1 row" [ngClass] = "{'alert-success' : ad.active === true, 'alert-danger': ad.active === false}">
+                                {{ad.active | activation}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class = "alert my-1 row" [ngClass] = "{'alert-success' : ad.verified === true, 'alert-warning': ad.verified === false}">
+                                {{ad.verified | verification}}
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class = "alert my-1 row" [ngClass] = "{'alert-success' : ad.verified === true && ad.verified === true, 'alert-danger' : ad.active === false || ad.verified === false }">
+                                {{ad.verified && ad.active | broadcast : ad.active : ad.verified }}
+                            </div>
+                        </td>
+                        <td>
+                            <button class = "btn p-2" [ngClass]="{ 'btn-success' : ad.verified === false, 'btn-danger' : ad.verified === true }" (click) = "verify(ad.id, !ad.verified)">
+                                {{!ad.verified | verifyButton}}
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

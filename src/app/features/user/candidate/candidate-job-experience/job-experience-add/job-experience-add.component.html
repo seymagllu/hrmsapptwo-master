@@ -1,0 +1,47 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#JobExperienceAdd">
+    İş Tecrübesi Ekle
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="JobExperienceAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <form [formGroup] = "jobExperienceForm">
+            <div class="form-floating mb-3">
+              <select class="form-select" aria-label="OpenPositions" formControlName="positionId" id="openPositions">
+                <option [ngValue]="item.id" *ngFor="let item of positions">{{item.title}}</option>
+              </select>
+              <label for="openPositions">Pozisyon</label>
+            </div>
+  
+            <div class="mb-3 row">
+              <div class="input-group mb-3">
+                <input type="number" class="form-control" placeholder="İşe Giriş Tarihi" aria-label="Giriş" formControlName = "startYear">
+                <input type="number" class="form-control" placeholder="İşten Çıkış Tarihi" aria-label="Çıkış" formControlName = "quitYear">
+              </div>
+              <small class="form-text text-danger" *ngIf="!validDates">
+                İşe başlama tarihi işten çıkış tarihinden büyük olamaz...
+              </small>
+            </div>
+            <div class="mb-3 row">
+              <label for="inputWorkPlace" class="col-sm-4 col-form-label">Çalışılan Kurum</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputWorkPlace" formControlName = "workPlace">
+              </div>
+            </div>
+  
+          </form>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click) = "addJobExperience()">İş Tecrübesi Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>

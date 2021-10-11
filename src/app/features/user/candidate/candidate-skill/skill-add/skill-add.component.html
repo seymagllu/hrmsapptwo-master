@@ -1,0 +1,28 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#skillAdd">
+    Yetenek Ekle
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="skillAdd" tabindex="-1" aria-labelledby="skillAdd" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup] = "addSkillForm">
+            <div class="form-floating mb-3">
+              <select class="form-select" aria-label="skills" formControlName="skillId" id="skills">
+                <option [ngValue]="item.id" *ngFor="let item of skills">{{item.name}}</option>
+              </select>
+              <label for="skills">Yetenekler</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click) ="addSkill()">Yetenek EKle</button>
+        </div>
+      </div>
+    </div>
+  </div>

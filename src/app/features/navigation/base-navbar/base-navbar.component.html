@@ -1,0 +1,52 @@
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 py-3 m-0" href="#">HRMS App</a>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class = "container" *ngIf = "checkUser(); else notLoggedIn">
+                <ul class="navbar-nav me-5 mb-2 mb-sm-0">
+                <li class = "nav-item me-5">
+                    <a class = "nav-link text-light" *ngIf = "getUserInfo().firstName !== undefined; else employerWelcome">Merhaba {{getUserInfo().firstName}}</a>
+                    <ng-template #employerWelcome >
+                        <a class = "nav-link text-light">Merhaba {{getUserInfo().companyName}}</a>
+                    </ng-template>
+                </li>
+                <li class = "nav-item me-5">
+                    <a class = "pointer-link nav-link" (click) = "signOut()">Çıkış Yap</a>
+                </li>
+                </ul>
+
+            </div>
+
+              <ng-template #notLoggedIn>
+                <div class="collapse navbar-collapse me-5" id="navbarsExample03">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item dropdown me-5">
+                            <a class="nav-link" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Kullanıcı</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                                <li><a class="dropdown-item" routerLink = "/candidateSignIn" >Üye Ol</a></li>
+                                <li><a class="dropdown-item" routerLink = "/candidateLogin">Giriş Yap</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown me-5">
+                            <a class="nav-link" href="#" id="dropdown03" data-bs-toggle="dropdown"aria-expanded="false">İşveren</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                                <li><a class="dropdown-item" routerLink = "/employerSignIn">Üye Ol</a></li>
+                                <li><a class="dropdown-item" routerLink = "/employerLogin">Giriş Yap</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item me-5">
+                            <a class="nav-link" aria-current="page" routerLink = "/systemLogin">Sistem Girişi</a>
+                          </li>
+                    </ul>
+                </div>
+              </ng-template>
+ 
+        </div>
+    </nav>
+
+</header>

@@ -1,0 +1,57 @@
+<div *ngIf = "employers.length === 0; else content"></div>
+
+<ng-template #content>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <h3 class = " my-5 text-center border-2 border-bottom">Güncelleme Kontrolü</h3>
+                <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="pi pi-search"></i></span>
+                            <input type="text" class="form-control" placeholder = "Firma Adı" [(ngModel)] = "filterText" />
+                          </div>
+                    </div>
+                </div>
+                <p-table [value]="employers | filterCompany : filterText" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,15]">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Şirket Adı</th>
+                            <th>E-Posta</th>
+                            <th>Web Sitesi</th>
+                            <th>Telefon</th>
+                            <th>Güncellemeler</th>
+                            <th>Güncellemeleri Onayla</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-emp>
+                        <tr>
+                            <td>{{emp.companyName}}</td>
+                            <td>{{emp.email}}</td>
+                            <td>{{emp.website}}</td>
+                            <td>{{emp.phoneNumber}}</td>
+                            <td>
+                                <div class="alert my-1 row" [ngClass] = "{'alert-success' : emp.updateVerified === true, 'alert-warning': emp.updateVerified === false}">
+                                    {{emp.updateVerified | update}}
+                                </div>
+                                
+                            </td>
+                            <td>
+                                <button class = "btn p-2" [ngClass] = "{'disabled btn-success' : emp.updateVerified === true || emp.updateVerified === null, 'btn-warning': emp.updateVerified === false}" (click) = "applyChanges(emp.id)">
+                                    {{emp.updateVerified | updateButton}}
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="paginatorleft">
+                    </ng-template>
+                    <ng-template pTemplate="paginatorright">
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</ng-template>
+

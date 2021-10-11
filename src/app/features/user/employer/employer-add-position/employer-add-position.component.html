@@ -1,0 +1,28 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#positionAdd">
+    Yeni Pozisyon Ekle
+   </button>
+   
+   <!-- Modal -->
+   <div class="modal fade" id="positionAdd" tabindex="-1" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           <form [formGroup] = "positionAddForm">
+             <div class="mb-3 row">
+               <label for="inputPositionTitle" class="col-sm-4 col-form-label">Pozisyon Adı:</label>
+               <div class="col-sm-8">
+                 <input type="text" class="form-control" id="inputPositionTitle" formControlName = "title">
+               </div>
+             </div>
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click) = "addPosition()">Yeni Pozisyon Oluştur</button>
+         </div>
+       </div>
+     </div>
+   </div>

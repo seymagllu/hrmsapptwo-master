@@ -1,0 +1,30 @@
+<div *ngIf = "candidate === undefined;else content"></div>
+
+<ng-template #content>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form [formGroup] = "cvAddForm">
+                <div class="m-3">
+                  <label for="cvAddTitle" class="form-label">Başlık</label>
+                  <input type="text" class="form-control" id="cvAddTitle" placeholder="Özgeçmiş Başlığı" formControlName = "title">
+                </div>
+            
+                <div class="m-3">
+                  <label for="cvAddCoverLetter" class="form-label">Ön Yazı</label>
+                  <textarea class="form-control" id="cvAddCoverLetter" rows="3" formControlName = "coverLetter"></textarea>
+                </div>
+              </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="row ">
+        <div class="col-4"></div>
+        <div class="col-4"><button class = "btn btn-primary my-3 px-3 w-100" (click) = "createCv()">Yeni Özgeçmiş Oluştur</button></div>
+        <div class="col-4"></div>
+    </div>
+</div>
+</ng-template>
+
+

@@ -1,0 +1,45 @@
+<div *ngIf = "jobAdvertisements === undefined || employers.length === 0; else carousel"></div>
+
+
+<ng-template #carousel>
+  <div class="container-fluid pb-5">
+    <div class="row">
+      <h3 class = " mt-5 mb-3 border-bottom border-3 border-dark">Güncel İlanlar</h3>
+    </div>
+    <div class="row px-4">
+      <p-carousel [value]="jobAdvertisements" [numVisible]="3" [numScroll]="1" [autoplayInterval]="3000" [circular]="true" [showIndicators] = "false">
+        <ng-template let-ad pTemplate="item">
+          <p-card header="{{ad.employer.companyName}}" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+            <ng-template pTemplate="header">
+                <img alt="Card" src= "../../../../assets/usercard.png">
+            </ng-template>
+            <p>{{ad.position.title}}</p>
+            <p>{{ad.city.name}}</p>
+        </p-card>
+        </ng-template>
+    </p-carousel>
+    </div>
+    <div class="row">
+      <h3 class = "mb-3 border-bottom border-3 border-dark">Şirketler</h3>
+    </div>
+    <div class="row px-4">
+      <p-carousel [value]="employers" [numVisible]="3" [numScroll]="1" [autoplayInterval]="3000" [circular]="true" [showIndicators] = "false">
+        <ng-template let-employer pTemplate="item">
+
+          <p-card header="{{employer.companyName}}" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+            <ng-template pTemplate="header">
+                <img alt="Card" src="../../../../assets/usercard.png">
+            </ng-template>
+            <a class = "btn btn-primary" routerLink = "jobAdsByCompany/{{employer.id}}">Tüm İlanarı Göster</a>
+        </p-card>
+
+        </ng-template>
+    </p-carousel>
+    </div>
+    <div class="row p-4">
+      <app-job-advertisement-list></app-job-advertisement-list>
+    </div>
+  </div>
+
+</ng-template>
+
